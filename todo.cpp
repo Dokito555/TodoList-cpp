@@ -1,7 +1,7 @@
 ﻿#include <iostream>
 #include "common.h"
 
-// Storage for todo
+// Storage for todos
 Todo TodoList[100];
 
 // Add Todo to Todolist array
@@ -138,6 +138,7 @@ string updateTodoDescription(int index, string newDesc) {
 	}
 }
 
+// TODO: FIX THIS FUNCTION,RETURN BOOLEAN -> RETURN STRING MESSAGE WHEN TRIGGERED
 // Toggle Todo IsDone Status
 bool toggleTodo(int index) {
 	// Check if currentSize is below array capacity
@@ -168,7 +169,7 @@ bool toggleTodo(int index) {
 
 // Delete Todo from Todolist array by Id
 // index as id paramater
-bool deleteTodo(int index) {
+string deleteTodo(int index) {
 	// Check if currentSize is below array capacity and index number below currentSize
 	if (currentSize < 101) {
 		// Check if index is below currentSize
@@ -178,7 +179,7 @@ bool deleteTodo(int index) {
 					// Temporary: Change the deleted Todo to an empty element
 					// TODO: Fix this from empty element to actually delete the element and shift the remaining ones
 					TodoList[i] = {};
-					return true;
+					return "Todo Deleted";
 				}
 			}
 		}
@@ -186,15 +187,14 @@ bool deleteTodo(int index) {
 		// check if index above array capacity
 		// return message when triggered
 		else {
-			cout << "id parameter above the current Todolist index, Couldn't Update Todo" << endl;
+			return "id parameter above the current Todolist index, Couldn't Update Todo";
 		}
 	}
 	// Error Handling: 
 	// check if currentSize above array capacity
 	// return message when triggered
 	else {
-		cout << "Todo Exceeded Maximum array capacity or Id above current array size, Couldn't Delete Todo" << endl;
-		return false;
+		return "Todo Exceeded Maximum array capacity, Couldn't Delete Todo";
 	}
 }
 
@@ -208,13 +208,16 @@ int main() {
 		cout << "1. Insert Todo" << endl;
 		cout << "2. Read Todo" << endl;
 		cout << "3. Read Todo From Id" << endl;
-		cout << "3. Update Todo" << endl;
-		cout << "4. Delete Todo" << endl;
+		cout << "4. Update Todo" << endl;
+		cout << "5. Delete Todo" << endl;
 		cout << "9. Exit" << endl;
 		cin >> opt;
 		switch (opt)
 		{
 		case 1:
+			// Initiate Insert Todo to Todolist array
+			// Input Todo class instance as argument
+			//TODO: FIX THESE getline()
 			cout << "INSERT YOUR TODO" << endl;
 			cout << endl;
 			cout << "Insert Todo Title: ";
@@ -239,11 +242,14 @@ int main() {
 				todo.isDone = false;
 			}
 			addTodo(todo);
+			cout << endl;
 			break;
 		case 2:
+			// Initiate read Todo from Todolist array
 			cout << "READ TODO" << endl;
 			cout << endl;
 			readTodo();
+			cout << endl;
 			cout << "Would you like to exit? y/n: ";
 			exitOpt = "";
 			cin >> status;
@@ -253,13 +259,17 @@ int main() {
 			}
 			if (exitOpt == "y") {
 				cout << "Proceed to exit" << endl;
+				cout << endl;
 				break;
 			}
 			if (exitOpt == "n") {
 				cout << "On stand by" << endl;
+				cout << endl;
 				break;
 			}
 		case 3:
+			// Initiate Read todo from id
+			// Input id as argument
 			int id;
 
 			cout << "READ TODO FROM ID" << endl;
@@ -267,7 +277,7 @@ int main() {
 			cout << "which id?" << endl;
 			cin >> id;
 			readTodoFromId(id);
-			cout << "Would you like to exit? 1/0: ";
+			cout << "Would you like to exit? y/n: ";
 			cin >> exitOpt;
 			if (exitOpt != "y" && exitOpt != "n") {
 				cout << "Couldn't Read Option, Automatically exit..." << endl;
@@ -275,14 +285,16 @@ int main() {
 			}
 			if (exitOpt == "y") {
 				cout << "Proceed to exit" << endl;
+				cout << endl;
 				break;
 			}
 			if (exitOpt == "n") {
 				cout << "On stand by" << endl;
+				cout << endl;
 				break;
 			}
 		case 4:
-
+			// Initiate update Todo
 		case 9:
 			cout << "EXIT, Goodbye" << endl;
 			return 0;
