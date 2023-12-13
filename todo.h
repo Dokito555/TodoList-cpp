@@ -7,6 +7,7 @@ struct Todo {
 	int id;
 	std::string title;
 	std::string desc;
+	std::string dueDate;
 	bool isDone;
 };
 

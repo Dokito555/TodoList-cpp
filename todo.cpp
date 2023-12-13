@@ -9,6 +9,7 @@ string addTodo(Todo todo) {
 	// Check if currentSize is below array capacity
 	if (currentSize < 101) {
 		TodoList[currentSize] = todo;
+		// Add current array size
 		currentSize++;
 		return "Added Todo";
 	}
@@ -27,6 +28,7 @@ void readTodo() {
 		// Print out todos
 		// Format Example: 1. Doing Something > Not Done 
 		for (int i = 1; i < currentSize; i++) {
+			// Check empty array element
 			if (TodoList[i].id == 0) {
 				continue;
 			}
@@ -38,11 +40,13 @@ void readTodo() {
 			// true -> [✓] = Done, 
 			// false -> [] = Not Done
 			if (TodoList[i].isDone) {
-				cout << "Done" << endl;
+				cout << "Done";
 			}
 			else {
-				cout << "Not Done" << endl;
+				cout << "Not Done";
 			}
+			cout << " > ";
+			cout << TodoList[i].dueDate;
 			cout << endl;
 		}
 	}
@@ -68,6 +72,9 @@ void readTodoFromId(int index) {
 				cout << "description: " << endl;
 				cout << TodoList[i].desc << endl;
 				cout << endl;
+				cout << "Due Date: " << endl;
+				cout << TodoList[i].dueDate << endl;
+				cout << endl;
 				cout << "status: ";
 				// Check isDone status: 
 				// true -> [✓] = Done, 
@@ -78,7 +85,6 @@ void readTodoFromId(int index) {
 				else {
 					cout << "Not Done" << endl;
 				}
-				cout << endl;
 			}
 		}
 	}
@@ -89,6 +95,9 @@ void readTodoFromId(int index) {
 		cout << "Todo Exceeded Maximum array capacity, Couldn't Read Todo" << endl;
 	}
 }
+
+// Print out specific Todo from Todolist array by Date
+
 
 // Update Todo Title
 string updateTodoTitle(int index, string newTitle) {
@@ -237,6 +246,15 @@ int main() {
 			cout << "Insert Todo Description: " << endl;
 			getline(cin, todo.desc);
 			cout << endl;
+			cout << "Insert Your Todo Due Date in DD/MM/YYYY format: ";
+			cin >> todo.dueDate;
+			// Check date format
+			if (!validateDate(todo.dueDate)) {
+				cout << "Wrong date format please try again.." << endl;
+				cout << endl;
+				break;
+			}
+			cout << endl;
 			cout << "Is it done yet? y/n: ";
 			status = "";
 			cin >> status;
@@ -251,7 +269,7 @@ int main() {
 				todo.isDone = false;
 			}
 			todo.id = currentSize;
-			addTodo(todo);
+			cout << addTodo(todo);
 			cout << endl;
 			break;
 		case 2:
