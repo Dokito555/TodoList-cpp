@@ -96,6 +96,7 @@ string updateTodoTitle(int index, string newTitle) {
 			for (int i = 1; i < currentSize; i++) {
 				if (TodoList[i].id == index) {
 					TodoList[i].title == newTitle;
+					return "updated!";
 				}
 			}
 		}
@@ -123,6 +124,7 @@ string updateTodoDescription(int index, string newDesc) {
 			for (int i = 1; i < currentSize; i++) {
 				if (TodoList[i].id == index) {
 					TodoList[i].title == newDesc;
+					return "updated!";
 				}
 			}
 		}
@@ -152,6 +154,7 @@ string toggleTodo(int index) {
 				if (TodoList[i].id == index) {
 					// Toggle IsDone
 					!TodoList[i].isDone;
+					return "status toggled!";
 				}
 			}
 		}
@@ -222,7 +225,6 @@ int main() {
 		case 1:
 			// Initiate Insert Todo to Todolist array
 			// Input Todo class instance as argument
-			//TODO: FIX THESE getline()
 			cout << "INSERT YOUR TODO" << endl;
 			cout << endl;
 			cout << "Insert Todo Title: ";
@@ -271,19 +273,78 @@ int main() {
 			if (exitOpt == "n") {
 				cout << "On stand by" << endl;
 				cout << endl;
-				break;
 			}
 		case 3:
 			// Initiate Read todo from id
 			// Input id as argument
-			int id;
+			int readId;
 
 			cout << "READ TODO FROM ID" << endl;
 			cout << endl;
-			cout << "which id?: ";
-			cin >> id;
+			cout << "Which id?: ";
+			cin >> readId;
 			cout << endl;
-			readTodoFromId(id);
+			readTodoFromId(readId);
+			cout << "Would you like to exit? y/n: ";
+			cin >> exitOpt;
+			if (exitOpt != "y" && exitOpt != "n") {
+				cout << "Couldn't Read Option, Automatically exit..." << endl;
+				break;
+			}
+			if (exitOpt == "y") {
+				cout << "Proceed to exit" << endl;
+				cout << endl;
+				break;
+			}
+			if (exitOpt == "n") {
+				cout << "On stand by" << endl;
+				cout << endl;
+			}
+		case 4:
+			// Initiate update Todo
+			int updateId, updateOpt;
+			cout << "UPDATE TODO" << endl;
+			cout << endl;
+			cout << "Which id?: ";
+			cin >> updateId;
+			cout << endl;
+			cout << "What do you want to update?" << endl;
+			cout << "1. Title" << endl;
+			cout << "2. Description" << endl;
+			cout << "3. Status" << endl;
+			cout << "Your option: ";
+			cin >> updateOpt;
+			cout << endl;
+			switch (updateOpt)
+			{
+			case 1:
+				cout << "Write your new title: ";
+				cin.get();
+				getline(cin, todo.title);
+				updateTodoTitle(updateId, todo.title);
+				break;
+			case 2:
+				cout << "Write your new description: ";
+				cin.get();
+				getline(cin, todo.desc);
+				updateTodoDescription(updateId, todo.desc);
+				break;
+			case 3:
+				toggleTodo(updateId);
+
+			default:
+				break;
+			}
+			break;
+		case 5:
+			int deleteID;
+
+			cout << "DELETE TODO" << endl;
+			cout << endl;
+			cout << "Which id?: ";
+			cin >> deleteID;
+			cout << endl;
+			deleteTodo(deleteID);
 			cout << "Would you like to exit? y/n: ";
 			cin >> exitOpt;
 			if (exitOpt != "y" && exitOpt != "n") {
@@ -300,8 +361,6 @@ int main() {
 				cout << endl;
 				break;
 			}
-		case 4:
-			// Initiate update Todo
 		case 9:
 			cout << "EXIT, Goodbye" << endl;
 			return 0;
