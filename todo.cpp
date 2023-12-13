@@ -27,6 +27,9 @@ void readTodo() {
 		// Print out todos
 		// Format Example: 1. Doing Something > Not Done 
 		for (int i = 1; i < currentSize; i++) {
+			if (TodoList[i].id == 0) {
+				continue;
+			}
 			cout << TodoList[i].id;
 			cout << ". ";
 			cout << TodoList[i].title;
@@ -95,7 +98,7 @@ string updateTodoTitle(int index, string newTitle) {
 		if (index <= currentSize) {
 			for (int i = 1; i < currentSize; i++) {
 				if (TodoList[i].id == index) {
-					TodoList[i].title == newTitle;
+					TodoList[i].title = newTitle;
 					return "updated!";
 				}
 			}
@@ -123,7 +126,7 @@ string updateTodoDescription(int index, string newDesc) {
 		if (index <= currentSize) {
 			for (int i = 1; i < currentSize; i++) {
 				if (TodoList[i].id == index) {
-					TodoList[i].title == newDesc;
+					TodoList[i].desc = newDesc;
 					return "updated!";
 				}
 			}
@@ -143,7 +146,6 @@ string updateTodoDescription(int index, string newDesc) {
 	}
 }
 
-// TODO: FIX THIS FUNCTION,RETURN BOOLEAN -> RETURN STRING MESSAGE WHEN TRIGGERED
 // Toggle Todo IsDone Status
 string toggleTodo(int index) {
 	// Check if currentSize is below array capacity
@@ -153,7 +155,7 @@ string toggleTodo(int index) {
 			for (int i = 1; i < currentSize; i++) {
 				if (TodoList[i].id == index) {
 					// Toggle IsDone
-					!TodoList[i].isDone;
+					TodoList[i].isDone = !TodoList[i].isDone;
 					return "status toggled!";
 				}
 			}
@@ -321,17 +323,20 @@ int main() {
 				cout << "Write your new title: ";
 				cin.get();
 				getline(cin, todo.title);
-				updateTodoTitle(updateId, todo.title);
+				cout << updateTodoTitle(updateId, todo.title);
+				cout << endl;
 				break;
 			case 2:
 				cout << "Write your new description: ";
 				cin.get();
 				getline(cin, todo.desc);
-				updateTodoDescription(updateId, todo.desc);
+				cout << updateTodoDescription(updateId, todo.desc);
+				cout << endl;
 				break;
 			case 3:
-				toggleTodo(updateId);
-
+				cout << toggleTodo(updateId);
+				cout << endl;
+				break;
 			default:
 				break;
 			}
@@ -344,23 +349,8 @@ int main() {
 			cout << "Which id?: ";
 			cin >> deleteID;
 			cout << endl;
-			deleteTodo(deleteID);
-			cout << "Would you like to exit? y/n: ";
-			cin >> exitOpt;
-			if (exitOpt != "y" && exitOpt != "n") {
-				cout << "Couldn't Read Option, Automatically exit..." << endl;
-				break;
-			}
-			if (exitOpt == "y") {
-				cout << "Proceed to exit" << endl;
-				cout << endl;
-				break;
-			}
-			if (exitOpt == "n") {
-				cout << "On stand by" << endl;
-				cout << endl;
-				break;
-			}
+			cout << deleteTodo(deleteID);
+			break;
 		case 9:
 			cout << "EXIT, Goodbye" << endl;
 			return 0;
