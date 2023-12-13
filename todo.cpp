@@ -26,7 +26,7 @@ void readTodo() {
 	if (currentSize < 101) {
 		// Print out todos
 		// Format Example: 1. Doing Something > Not Done 
-		for (int i = 0; i <= currentSize; i++) {
+		for (int i = 1; i < currentSize; i++) {
 			cout << TodoList[i].id;
 			cout << ". ";
 			cout << TodoList[i].title;
@@ -57,12 +57,14 @@ void readTodoFromId(int index) {
 	// Check if currentSize is below array capacity
 	if (currentSize < 101) {
 		// Print out specific todo
-		for (int i = 0; i <= currentSize; i++) {
+		for (int i = 1; i < currentSize; i++) {
 			if (TodoList[i].id == index) {
 				cout << TodoList[i].id << ". ";
 				cout << TodoList[i].title << endl;
+				cout << endl;
 				cout << "description: " << endl;
 				cout << TodoList[i].desc << endl;
+				cout << endl;
 				cout << "status: ";
 				// Check isDone status: 
 				// true -> [✓] = Done, 
@@ -73,6 +75,7 @@ void readTodoFromId(int index) {
 				else {
 					cout << "Not Done" << endl;
 				}
+				cout << endl;
 			}
 		}
 	}
@@ -90,7 +93,7 @@ string updateTodoTitle(int index, string newTitle) {
 	if (currentSize < 101) {
 		// Check if index is below currentSize
 		if (index <= currentSize) {
-			for (int i = 0; i <= currentSize; i++) {
+			for (int i = 1; i < currentSize; i++) {
 				if (TodoList[i].id == index) {
 					TodoList[i].title == newTitle;
 				}
@@ -117,7 +120,7 @@ string updateTodoDescription(int index, string newDesc) {
 	if (currentSize < 101) {
 		// Check if index is below currentSize
 		if (index <= currentSize) {
-			for (int i = 0; i <= currentSize; i++) {
+			for (int i = 1; i < currentSize; i++) {
 				if (TodoList[i].id == index) {
 					TodoList[i].title == newDesc;
 				}
@@ -140,12 +143,12 @@ string updateTodoDescription(int index, string newDesc) {
 
 // TODO: FIX THIS FUNCTION,RETURN BOOLEAN -> RETURN STRING MESSAGE WHEN TRIGGERED
 // Toggle Todo IsDone Status
-bool toggleTodo(int index) {
+string toggleTodo(int index) {
 	// Check if currentSize is below array capacity
 	if (currentSize < 101) {
 		// Check if index is below currentSize
 		if (index <= currentSize) {
-			for (int i = 0; i <= currentSize; i++) {
+			for (int i = 1; i < currentSize; i++) {
 				if (TodoList[i].id == index) {
 					// Toggle IsDone
 					!TodoList[i].isDone;
@@ -174,7 +177,7 @@ string deleteTodo(int index) {
 	if (currentSize < 101) {
 		// Check if index is below currentSize
 		if (index <= currentSize) {
-			for (int i = 0; i <= currentSize; i++) {
+			for (int i = 1; i < currentSize; i++) {
 				if (TodoList[i].id == index) {
 					// Temporary: Change the deleted Todo to an empty element
 					// TODO: Fix this from empty element to actually delete the element and shift the remaining ones
@@ -211,7 +214,9 @@ int main() {
 		cout << "4. Update Todo" << endl;
 		cout << "5. Delete Todo" << endl;
 		cout << "9. Exit" << endl;
+		cout << "Pick your option: ";
 		cin >> opt;
+		cout << endl;
 		switch (opt)
 		{
 		case 1:
@@ -221,12 +226,12 @@ int main() {
 			cout << "INSERT YOUR TODO" << endl;
 			cout << endl;
 			cout << "Insert Todo Title: ";
-			/*getline(cin, todo.title);*/
-			cin >> todo.title;
+
+			cin.get();
+			getline(cin, todo.title);
 			cout << endl;
-			cout << "Insert Todo Description: ";
-			/*getline(cin, todo.desc);*/
-			cin >> todo.desc;
+			cout << "Insert Todo Description: " << endl;
+			getline(cin, todo.desc);
 			cout << endl;
 			cout << "Is it done yet? y/n: ";
 			status = "";
@@ -241,6 +246,7 @@ int main() {
 			if (status == "n") {
 				todo.isDone = false;
 			}
+			todo.id = currentSize;
 			addTodo(todo);
 			cout << endl;
 			break;
@@ -274,8 +280,9 @@ int main() {
 
 			cout << "READ TODO FROM ID" << endl;
 			cout << endl;
-			cout << "which id?" << endl;
+			cout << "which id?: ";
 			cin >> id;
+			cout << endl;
 			readTodoFromId(id);
 			cout << "Would you like to exit? y/n: ";
 			cin >> exitOpt;

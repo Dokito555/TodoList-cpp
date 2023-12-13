@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-static int currentSize = 0;
+static int currentSize = 1;
 
 struct Todo {
 	int id;
