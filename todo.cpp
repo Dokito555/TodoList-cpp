@@ -40,10 +40,10 @@ void readTodo() {
 			// true -> [✓] = Done, 
 			// false -> [] = Not Done
 			if (TodoList[i].isDone) {
-				cout << "[✓]";
+				cout << "DONE";
 			}
 			else {
-				cout << "[]";
+				cout << "NOT DONE";
 			}
 			cout << " > ";
 			cout << TodoList[i].dueDate;
@@ -248,7 +248,7 @@ string toggleTodo(int index) {
 	// return message when triggered
 	else {
 		return "Todo Exceeded Maximum array capacity, Couldn't Update Todo";
-	}
+	}	
 }
 
 // Delete Todo from Todolist array by Id
@@ -470,7 +470,7 @@ int main() {
 			cout << "Which id?: ";
 			cin >> deleteID;
 			cout << endl;
-			cout << deleteTodo(deleteID);
+			cout << deleteTodo(deleteID) << endl;
 			break;
 		case 9:
 			cout << "EXIT, Goodbye" << endl;
