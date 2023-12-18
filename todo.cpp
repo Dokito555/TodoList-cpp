@@ -118,10 +118,10 @@ void readTodoFromDate(string date) {
 					// true -> [✓] = Done, 
 					// false -> [] = Not Done
 					if (TodoList[i].isDone) {
-						cout << "[✓]";
+						cout << "DONE";
 					}
 					else {
-						cout << "[]" << endl;
+						cout << "NOT DONE" << endl;
 					}
 				}
 			}
