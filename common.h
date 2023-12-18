@@ -38,7 +38,7 @@ bool validateDate(string date) {
 			};
 		}
 	}
-	if (stoi(checkDay) > 31 && stoi(checkMonth) <= 0) {
+	if (stoi(checkDay) > 31 && stoi(checkDay) <= 0) {
 		cout << "wrong day format";
 		return false;
 	}
